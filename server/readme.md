@@ -1,0 +1,3 @@
+start dev:
+
+nodemon index
