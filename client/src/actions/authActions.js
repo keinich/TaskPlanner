@@ -3,9 +3,10 @@ import * as api from "../api/index.js";
 
 export const siginin = (formData, navigate) => async (dispatch) => {
   try {
-    // log in the user...
-
-    navigate.push("/");
+    
+    const { data } = await api.signIn(formData);
+    dispatch({type: AUTH, data});
+    navigate("/");
   } catch (error) {
     console.log("error in signin", error);
   }
@@ -13,19 +14,24 @@ export const siginin = (formData, navigate) => async (dispatch) => {
 
 export const signup = (formData, navigate) => async (dispatch) => {
   try {
-    // sign up the user...
+    
+    const { data } = await api.signUp(formData);
+    dispatch({type: AUTH, data});
 
-    navigate.push("/");
+    navigate("/");
   } catch (error) {
     console.log("error in signin", error);
   }
 }
 
-export const signupWithGoogle = (googleProfile, navigate) => async (dispatch) => {
+export const signupWithGoogle = (googleRes, navigate) => async (dispatch) => {
   try {
-    // sign up the user...
+    const { data } = await api.signUpWithGoogle(googleRes);
 
-    navigate.push("/");
+    dispatch({type: AUTH, data});
+
+    console.log("navigation after google", navigate);
+    navigate("/");
   } catch (error) {
     console.log("error in signin", error);
   }

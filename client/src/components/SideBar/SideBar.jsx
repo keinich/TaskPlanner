@@ -151,8 +151,8 @@ export default function MiniDrawer({ contentElement }) {
 
           {user ? (
             <>
-              <Typography variant="h6" noWrap component="div">
-                {user?.profileObject.email}
+              <Typography variant="h6" noWrap component="div">                
+                {user?.email}
               </Typography>
               <Button color="secondary" onClick={logout}>
                 Logout

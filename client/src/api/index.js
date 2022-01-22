@@ -1,5 +1,10 @@
-import axios from 'axios';
+import axios from "axios";
 
-const url = 'http://localhost:5000/tasks';
+const API = axios.create({ baseURL: "http://localhost:5000" });
 
-export const fetchTasks = () => axios.get(url);
+export const fetchTasks = () => API.get("/tasks");
+
+export const signIn = (formData) => API.post("/users/signin", formData);
+export const signUp = (formData) => API.post("/users/signup", formData);
+export const signUpWithGoogle = (googleProfile) =>
+  API.post("/users/signupgoogle", googleProfile);

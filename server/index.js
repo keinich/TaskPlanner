@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 
  app.use('/tasks', taskRoutes);
- app.use('/user', userRoutes);
+ app.use('/users', userRoutes);
 
 //ROUTES//
 
