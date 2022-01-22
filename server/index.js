@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 
 import pool from "./db.js";
 import taskRoutes from './routes/tasksRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(cors());
 app.use(express.json());
 
  app.use('/tasks', taskRoutes);
+ app.use('/user', userRoutes);
 
 //ROUTES//
 

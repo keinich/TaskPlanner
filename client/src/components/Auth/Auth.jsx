@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import GoogleLogin from "react-google-login";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 import {
   Avatar,
@@ -10,25 +10,44 @@ import {
   Grid,
   Typography,
   Container,
-  TextField,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import IceSkatingIcon from "@mui/icons-material/IceSkating";
 
 import Input from "./Input";
+import { siginin, signup } from "../../actions/authActions";
 
 import "./Auth.css";
+
+const initalState = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
 
 const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSignup, setIsSignup] = useState(true);
+  const [formData, setFormData] = useState(initalState);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = () => {};
-  const handleChange = () => {
-    console.log("Some change");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    if (isSignup) {
+      dispatch(signup(formData, navigate));
+    } else {
+      dispatch(siginin(formData, navigate));
+    }
   };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
   const handleShowPassword = () =>
     setShowPassword((prevShowPassword) => !prevShowPassword);
 
@@ -94,12 +113,34 @@ const Auth = () => {
               type={showPassword ? "text" : "password"}
               handleShowPassword={handleShowPassword}
             ></Input>
-            <Input
-              name="repeatPassword"
-              label="Repeat Password"
-              onChange={handleChange}
-              type="password"
-            ></Input>
+            {isSignup && (
+              <Input
+                name="repeatPassword"
+                label="Repeat Password"
+                onChange={handleChange}
+                type="password"
+              ></Input>
+            )}
+            <Grid item xs={12}>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className="my-submit"
+              >
+                {isSignup ? "Sign Up" : "Sign In"}
+              </Button>
+              <Grid container justify="flex-end">
+                <Grid item>
+                  <Button onClick={switchMode}>
+                    {isSignup
+                      ? "Already have a account? Sign In"
+                      : "Don't have a account? Sign Up"}
+                  </Button>
+                </Grid>
+              </Grid>
+            </Grid>
             <Grid item xs={12}>
               <GoogleLogin
                 clientId="776141787389-sps3eopqvjs8svrvhj39kq5fublj03nn.apps.googleusercontent.com"
@@ -120,26 +161,6 @@ const Auth = () => {
                 onFailure={googleFailure}
                 cookiePolicy="single_host_origin"
               />
-            </Grid>
-            <Grid item xs={12}>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className="my-submit"
-              >
-                {isSignup ? "Sign Up" : "Sign In"}
-              </Button>
-              <Grid container justify="flex-end">
-                <Grid item>
-                  <Button onClick={switchMode}>
-                    {isSignup
-                      ? "Already have a account? Sign In"
-                      : "Don't have a account? Sign Up"}
-                  </Button>
-                </Grid>
-              </Grid>
             </Grid>
           </Grid>
         </form>
