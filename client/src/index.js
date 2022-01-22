@@ -8,13 +8,16 @@ import reducers from "./reducers";
 
 import "./index.css";
 import App from "./App";
+import { BrowserRouter } from "react-router-dom";
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)));
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ThemeProvider, Typography } from "@mui/material";
 import darkTheme from "./themes";
@@ -12,30 +12,35 @@ import "./App.css";
 const App = () => {
   // const [authToken, setAuthToken] = useState(false);
 
+  const [profile, setProfile] = useState(localStorage.getItem("profile"));
+
   const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getTasks());
-  }, [dispatch]);
+    setProfile(localStorage.getItem("profile"));   
+  }, [dispatch, profile, location]);
 
-  const profile = localStorage.getItem("profile");
   const authToken = profile !== undefined && profile !== null;
 
   console.log("authToken", authToken);
 
   return (
-    <BrowserRouter>
-      <ThemeProvider theme={darkTheme}>
-        <SideBar
-          contentElement={
-            <Routes>
-              <Route path="/" element={<Schedule />} />
-              <Route path="/auth" element={<Auth />} />
-            </Routes>
-          }
-        ></SideBar>
-      </ThemeProvider>
-    </BrowserRouter>
+    <ThemeProvider theme={darkTheme}>      
+      {profile ? (
+        <Routes>
+          <Route
+            path="/"
+            element={<SideBar contentElement={<Schedule />}></SideBar>}
+          />
+          <Route path="/auth" element={<Auth />} />
+        </Routes>
+      ) : (
+        <Auth />
+      )}
+    </ThemeProvider>
   );
 };
 

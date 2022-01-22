@@ -20,3 +20,13 @@ export const signup = (formData, navigate) => async (dispatch) => {
     console.log("error in signin", error);
   }
 }
+
+export const signupWithGoogle = (googleProfile, navigate) => async (dispatch) => {
+  try {
+    // sign up the user...
+
+    navigate.push("/");
+  } catch (error) {
+    console.log("error in signin", error);
+  }
+}
