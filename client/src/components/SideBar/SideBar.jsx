@@ -20,6 +20,9 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import WbSunnyIcon from "@mui/icons-material/WbSunny";
+import CalenderTodayIcon from "@mui/icons-material/CalendarToday";
+import TaskIcon from "@mui/icons-material/Task";
 import Button from "@mui/material/Button";
 
 const drawerWidth = 240;
@@ -151,7 +154,7 @@ export default function MiniDrawer({ contentElement }) {
 
           {user ? (
             <>
-              <Typography variant="h6" noWrap component="div">                
+              <Typography variant="h6" noWrap component="div">
                 {user?.email}
               </Typography>
               <Button color="secondary" onClick={logout}>
@@ -177,18 +180,28 @@ export default function MiniDrawer({ contentElement }) {
         </DrawerHeader>
         <Divider />
         <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          <ListItem button key={"MyDay"}>
+            <ListItemIcon>
+              <WbSunnyIcon />
+            </ListItemIcon>
+            <ListItemText primary="My Day" />
+          </ListItem>
+          <ListItem button key={"Calendar"}>
+            <ListItemIcon>
+              <CalenderTodayIcon />
+            </ListItemIcon>
+            <ListItemText primary="Calendar" />
+          </ListItem>
+          <ListItem button key={"Backlogs"}>
+            <ListItemIcon>
+              <TaskIcon />
+            </ListItemIcon>
+            <ListItemText primary="Backlog" />
+          </ListItem>
         </List>
         <Divider />
         <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
+          {["Projects", "Teams", "Account"].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}

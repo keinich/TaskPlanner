@@ -4,10 +4,11 @@ import { useDispatch } from "react-redux";
 import { ThemeProvider, Typography } from "@mui/material";
 import darkTheme from "./themes";
 
-import { Schedule, SideBar, Auth, TopBar } from "./components";
+import {  SideBar, Auth } from "./components";
 import { getTasks } from "./actions/taskActions";
 
 import "./App.css";
+import MyDay from "./components/MyDay/MyDay";
 
 const App = () => {
   // const [authToken, setAuthToken] = useState(false);
@@ -33,7 +34,7 @@ const App = () => {
         <Routes>
           <Route
             path="/"
-            element={<SideBar contentElement={<Schedule />}></SideBar>}
+            element={<SideBar contentElement={<MyDay />}></SideBar>}
           />
           <Route path="/auth" element={<Auth />} />
         </Routes>

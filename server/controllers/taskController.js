@@ -12,10 +12,10 @@ export const getTasks = async (req, res) => {
 
 export const createTask = async (req, res) => {
   try {
-
+    console.log("body", req.body);
     const { description, name } = req.body;
-    if (!req.userId) return res.json({message: 'Unauthanticated'});    
-   
+    if (!req.userId) return res.json({ message: "Unauthanticated" });
+
     const newTask = await pool.query(
       "INSERT INTO tasks (name, description, user_id) VALUES($1,$2,$3) RETURNING *",
       [name, description, req.userId]
@@ -25,4 +25,29 @@ export const createTask = async (req, res) => {
   } catch (error) {
     res.status(409).json({ message: error.message });
   }
+};
+
+// tasks/1
+export const updateTask = async (req, res) => {
+  // if (!req.userId) return res.json({ message: "Unauthanticated" });
+
+  const { id } = req.params;
+
+  const existingTaskQuery = await pool.query(
+    "select * from public.tasks where task_id = $1 limit 1",
+    [id]
+  );
+
+  // console.log("existing task", existingTask);
+  const { description, name } = req.body;
+
+  if (existingTaskQuery.rows.count === 0) {
+    return res.status(404).send("No task with given id");
+  }
+
+  const updatedTaskQuery = await pool.query(
+    "update tasks set name = $2, description = $3 where task_id = $1 RETURNING *",
+    [id, name, description]
+  );
+  return res.status(200).json(updatedTaskQuery.rows[0]);
 };

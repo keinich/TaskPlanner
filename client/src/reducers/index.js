@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
 
-import taskReducers from "./taskReducers";
+import tasks from "./taskReducers";
 import authReducers from "./authReducers";
 
 export default combineReducers({
-  taskReducers,
+  tasks,
   authReducers
 });

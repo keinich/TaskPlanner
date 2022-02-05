@@ -1,0 +1,11 @@
+.task__paper {
+  margin: auto;
+  padding: 10;
+  display: flex;
+  align-items: center;
+  margin-top: 10px; 
+}
+
+.task__span {
+  margin: auto;
+}

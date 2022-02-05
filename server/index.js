@@ -12,8 +12,8 @@ const app = express();
 // middleware
 // app.use(bodyParser.json({ limit: "30mb", extenended: true }));
 // app.use(bodyParser.urlencoded({ limit: "30mb", extenended: true }));
-app.use(cors());
 app.use(express.json());
+app.use(cors());
 
  app.use('/tasks', taskRoutes);
  app.use('/users', userRoutes);
@@ -65,19 +65,19 @@ app.get("/tasks/:id", async (req, res) => {
 
 // update a task
 
-app.put("/tasks/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { description } = req.body;
-    const updateTask = await pool.query(
-      "UPDATE public.tasks SET description = $1 WHERE task_id = $2",
-      [description, id]
-    );
-    res.json("Task was updated");
-  } catch (error) {
-    console.log(error.message);
-  }
-});
+// app.put("/tasks/:id", async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const { description } = req.body;
+//     const updateTask = await pool.query(
+//       "UPDATE public.tasks SET description = $1 WHERE task_id = $2",
+//       [description, id]
+//     );
+//     res.json("Task was updated");
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// });
 
 // delete a task
 
