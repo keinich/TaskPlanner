@@ -8,13 +8,13 @@ import "./MyDay.css";
 const MyDay = () => {
   return (
     <Fragment>
-      <AddTodo sx={{ width: "100vw" }}></AddTodo>
-      <Grid container spacing={0} sx={{ height: "80vh", padding: "24px" }}>
+      <Grid container spacing={0} sx={{ height: "80vh" }}>
         {/* <Grid item xs={12}> */}
         {/* </Grid> */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ padding: "24px" }}>
           <TaskList />
         </Grid>
+        <AddTodo sx={{ width: "100vw" }}></AddTodo>
       </Grid>
     </Fragment>
   );

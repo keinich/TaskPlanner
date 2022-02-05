@@ -211,7 +211,16 @@ export default function MiniDrawer({ contentElement }) {
           ))}
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3, height: '100vh', overflowY: 'scroll', padding: 0 }}>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          height: "100vh",
+          overflowY: "scroll",
+          padding: 0,
+        }}
+      >
         <DrawerHeader />
         {contentElement}
       </Box>

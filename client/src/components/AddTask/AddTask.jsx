@@ -21,7 +21,13 @@ const AddTodo = () => {
     <Paper
       className="myday__paper"
       position="sticky"
-      sx={{ position: "sticky", top: 50, zIndex: 1100, width: "inherit" }}
+      sx={{
+        position: "sticky",
+        bottom: '0px',
+        // top: "85%",
+        zIndex: 1100,
+        width: "inherit",
+      }}
     >
       <form style={{ display: "flex" }} onSubmit={handleSubmit}>
         {/* <TextField name="taskName" variant="outlined"/> */}
