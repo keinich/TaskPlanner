@@ -36,7 +36,7 @@ const Task = ({ task }) => {
           </IconButton>
         </Paper>
       </Grid>
-      <UpdateTask openDrawerCaller={callOpenDrawer}></UpdateTask>
+      <UpdateTask openDrawerCaller={callOpenDrawer} taskId={task.task_id}></UpdateTask>
     </>
   );
 };
