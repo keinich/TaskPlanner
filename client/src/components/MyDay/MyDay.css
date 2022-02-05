@@ -2,6 +2,8 @@
   padding: 20px;
   margin: auto;
   text-align: center;
+  position: fixed;
+  bottom: 0;
   /* background-color: pink; */
   /* width: 500px; */
 }
