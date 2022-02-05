@@ -16,7 +16,7 @@ const AddTodo = () => {
   const handleSubmit = (e) => {
 
     e.preventDefault();    
-
+    console.log("creating task", postData);
     dispatch(createTask(postData));
   };
 
