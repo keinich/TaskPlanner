@@ -22,10 +22,20 @@ export const createTask = (task) => async (dispatch) => {
 };
 
 export const updateTask = (taskId, task) => async (dispatch) => {
-  try {    
+  try {
     const { data } = await api.updateTask(taskId, task);
-    
-    dispatch({ type: 'UPDATE', payload: data });
+
+    dispatch({ type: "UPDATE", payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteTask = (taskId) => async (dispatch) => {
+  try {
+    await api.deleteTask(taskId);
+
+    dispatch({ type: "DELETE", payload: taskId });
   } catch (error) {
     console.log(error);
   }

@@ -23,8 +23,12 @@ const AddTodo = () => {
       position="sticky"
       sx={{
         position: "sticky",
-        bottom: '0px',
-        // top: "85%",
+        // dislpay:'flex',
+        top: '6.5vh',
+        // top: '90%',  
+        // left: 0,
+        // right: 0,
+        // top: "70px",
         zIndex: 1100,
         width: "inherit",
       }}

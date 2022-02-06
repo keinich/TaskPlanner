@@ -25,6 +25,8 @@ import CalenderTodayIcon from "@mui/icons-material/CalendarToday";
 import TaskIcon from "@mui/icons-material/Task";
 import Button from "@mui/material/Button";
 
+import './SideBar.css'
+
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -213,12 +215,13 @@ export default function MiniDrawer({ contentElement }) {
       </Drawer>
       <Box
         component="main"
+        className="mainContent"
         sx={{
           flexGrow: 1,
           p: 3,
           height: "100vh",
-          overflowY: "scroll",
           padding: 0,
+          overflowY: 'scroll'
         }}
       >
         <DrawerHeader />

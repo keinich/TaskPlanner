@@ -50,18 +50,18 @@ app.use(cors());
 
 // get a task
 
-app.get("/tasks/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const task = await pool.query(
-      "SELECT * FROM public.tasks WHERE task_id = $1",
-      [id]
-    );
-    res.json(task.rows[0]);
-  } catch (error) {
-    console.log(error.message);
-  }
-});
+// app.get("/tasks/:id", async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const task = await pool.query(
+//       "SELECT * FROM public.tasks WHERE task_id = $1",
+//       [id]
+//     );
+//     res.json(task.rows[0]);
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// });
 
 // update a task
 
@@ -81,18 +81,18 @@ app.get("/tasks/:id", async (req, res) => {
 
 // delete a task
 
-app.delete("/tasks/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const deleteTask = await pool.query(
-      "DELETE FROM public.tasks WHERE task_id = $1",
-      [id]
-    );
-    res.json("Task was deleted");
-  } catch (error) {
-    console.log(error.message);
-  }
-});
+// app.delete("/tasks/:id", async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const deleteTask = await pool.query(
+//       "DELETE FROM public.tasks WHERE task_id = $1",
+//       [id]
+//     );
+//     res.json("Task was deleted");
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// });
 
 app.listen(5000, () => {
   console.log("server started on port 5000");

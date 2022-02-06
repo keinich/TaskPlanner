@@ -41,7 +41,7 @@ export const updateTask = async (req, res) => {
   // console.log("existing task", existingTask);
   const { description, name } = req.body;
 
-  if (existingTaskQuery.rows.count === 0) {
+  if (existingTaskQuery.rows.length === 0) {
     return res.status(404).send("No task with given id");
   }
 
@@ -50,4 +50,28 @@ export const updateTask = async (req, res) => {
     [id, name, description]
   );
   return res.status(200).json(updatedTaskQuery.rows[0]);
+};
+
+export const deleteTask = async (req, res) => {
+  const { id } = req.params;
+
+  if (!req.userId) return res.json({ message: "Unauthanticated" });
+
+  const existingTaskQuery = await pool.query(
+    "select * from public.tasks where task_id = $1 limit 1",
+    [id]
+  );
+
+  const { description, name } = req.body;
+
+  if (existingTaskQuery.rows.length === 0) {
+    return res.status(404).send(`No task with given id ${id}`);
+  }
+
+  const deletedTaskQuery = await pool.query(
+    "delete from tasks where task_id = $1",
+    [id]
+  );
+  return res.status(200).send("Task deleted");
+  // return res.status(200).json(existingTaskQuery);
 };

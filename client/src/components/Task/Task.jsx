@@ -5,9 +5,13 @@ import React from "react";
 
 import "./Task.css";
 import UpdateTask from "../UpdateTask/UpdateTask";
+import { useDispatch } from "react-redux";
+import { deleteTask } from "../../actions/taskActions";
 
 const Task = ({ task }) => {
   const callOpenDrawer = React.createRef(null);
+
+  const dispatch = useDispatch();
 
   const openDrawer = () => {
     callOpenDrawer.current();
@@ -31,6 +35,7 @@ const Task = ({ task }) => {
             color="primary"
             aria-label="Delete"
             className="task__icon"
+            onClick={() => dispatch(deleteTask(task.task_id))}
           >
             <DeleteIcon fontSize="small" />
           </IconButton>
