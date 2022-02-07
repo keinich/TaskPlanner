@@ -17,7 +17,7 @@ const devConfig = {
 }
 
 const prodConfig = {
-  connectionString: process.env.DATABASE_URL // heroku addon
+  connectionString: process.env.DATABASE_URL + '?sslmode=require' // heroku addon
 }
 
 console.log("prodConfig", prodConfig);
