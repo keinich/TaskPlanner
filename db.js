@@ -9,11 +9,11 @@ console.log("process.env", process.env);
 console.log("process.env.DATABASE_URL", process.env.DATABASE_URL);
 
 const devConfig = {
-  user: env.PG_USER,
-  password: env.PG_PASSWORD,
-  host: env.PG_HOST,
-  port: env.PG_PORT,
-  database: env.PG_DATABASE,
+  user: env?.PG_USER,
+  password: env?.PG_PASSWORD,
+  host: env?.PG_HOST,
+  port: env?.PG_PORT,
+  database: env?.PG_DATABASE,
 }
 
 const prodConfig = {
@@ -21,6 +21,6 @@ const prodConfig = {
 }
 
 // console.log("env", env.NODE_ENV);
-const pool = new Pool(env.NODE_ENV === "production" ? prodConfig : devConfig);
+const pool = new Pool(process.env.NODE_ENV === "production" ? prodConfig : devConfig);
 
 export default pool;
