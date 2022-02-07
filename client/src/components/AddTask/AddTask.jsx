@@ -1,9 +1,9 @@
-import { Input, Button, TextField, Paper } from "@mui/material";
+import { Input, Button, TextField, Paper, Box } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createTask } from "../../actions/taskActions";
 
-import './AddTask.css'
+import "./AddTask.css";
 
 const AddTodo = () => {
   const [postData, setPostData] = useState({
@@ -20,10 +20,8 @@ const AddTodo = () => {
   };
 
   return (
-    <Paper
-      className="addtask__paper"
-    >
-      <form style={{ display: "flex", width: '100%' }} onSubmit={handleSubmit}>
+    <Paper elevation={16} className="addtask__paper">
+      <form style={{ display: "flex", width: "100%" }} onSubmit={handleSubmit}>
         {/* <TextField name="taskName" variant="outlined"/> */}
         <Input
           placeholder="New Task"
