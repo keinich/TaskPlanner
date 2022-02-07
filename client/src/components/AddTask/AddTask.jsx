@@ -5,11 +5,17 @@ import { createTask } from "../../actions/taskActions";
 
 import "./AddTask.css";
 
-const AddTodo = () => {
-  const [taskData, setPostData] = useState({
+const AddTodo = ({dueDate}) => {
+  
+  if (dueDate === undefined) {
+    dueDate = new Date();
+  }
+  console.log("dueDate", dueDate);
+
+  const [taskData, setTaskData] = useState({
     name: "",
     description: "",
-    due_date: new Date(),
+    due_date: dueDate,
     userId: 0,
   });
   const dispatch = useDispatch();
@@ -20,6 +26,7 @@ const AddTodo = () => {
     dispatch(createTask(taskData));
   };
 
+
   return (
     <Paper elevation={16} className="addtask__paper">
       <form style={{ display: "flex", width: "100%" }} onSubmit={handleSubmit}>
@@ -28,7 +35,7 @@ const AddTodo = () => {
           placeholder="New Task"
           style={{ width: "90%" }}
           value={taskData.taskName}
-          onChange={(e) => setPostData({ ...taskData, name: e.target.value })}
+          onChange={(e) => setTaskData({ ...taskData, name: e.target.value })}
         />
         <Button
           type="submit"

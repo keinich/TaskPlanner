@@ -3,7 +3,7 @@
   flex-direction: column;
   /* background-color: #3b3c3f; */
   position: relative;
-  overflow: scroll;
+  overflow: hidden;
   flex: 1;
   scroll-padding-top: 100px;
   scroll-padding-left: 216px;
@@ -28,13 +28,14 @@
   flex: 1;
   cursor: grab;
   box-sizing: border-box;
+  overflow-y: hidden;
 }
 
 .weeklytasks__dayline {
   display: flex;
   position: sticky;
   top: 0;
-  min-height: 32px;
+  /* min-height: 32px; */
   z-index: 4;  
   /* border-bottom: 1px solid #DFE1E6; */
 }
@@ -58,5 +59,6 @@
   top: 0;
   min-height: 32px;
   z-index: 1;  
+  height: 100%;
   /* border-bottom: 1px solid #DFE1E6; */
 }

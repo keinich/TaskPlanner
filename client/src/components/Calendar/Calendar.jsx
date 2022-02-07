@@ -1,11 +1,15 @@
-import { Button, Paper } from "@mui/material";
+import { Button, TextField, IconButton } from "@mui/material";
 import React from "react";
 import WeeklyTasks from "../WeeklyTasks/WeeklyTasks";
+import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
+import ArrowForwardIconIos from "@mui/icons-material/ArrowForwardIos";
+import ArrowBackIconIos from "@mui/icons-material/ArrowBackIos";
 
 import "./Calendar.css";
 
 const Calendar = () => {
   const [offset, setOffset] = React.useState(0);
+  const [referenceDay, setReferenceDay] = React.useState(new Date());
 
   return (
     <div className="calendar__canvas">
@@ -16,12 +20,22 @@ const Calendar = () => {
               <div className="timeline__inner">
                 <div className="calendar__toolbar__wrapper">
                   <div className="calendar__toolbar">
-                    <Button>Test</Button>
-                    <div className="calendar__inner__toolbar">
-                      <Button>Left</Button>
-                      <Button>Today</Button>
-                      <Button>Right</Button>
-                    </div>
+                    {/* <DesktopDatePicker
+                      label="Day"
+                      // inputFormat="MM/dd/yyyy"
+                      value={referenceDay}
+                      onChange={(e) => setReferenceDay(e)}
+                      renderInput={(params) => <TextField {...params} />}
+                    /> */}
+                    {/* <div className="calendar__inner__toolbar"> */}
+                    <IconButton aria-label="delete" onClick={() => setOffset(offset - 1)}>
+                      <ArrowBackIconIos />
+                    </IconButton>
+                    <Button onClick={() => setOffset(0)}>Today</Button>
+                    <IconButton aria-label="delete"  onClick={() => setOffset(offset + 1)}>
+                      <ArrowForwardIconIos />
+                    </IconButton>
+                    {/* </div> */}
                   </div>
                 </div>
                 <WeeklyTasks weekOffset={offset}></WeeklyTasks>

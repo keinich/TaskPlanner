@@ -1,4 +1,4 @@
-import { Grid, Paper } from "@mui/material";
+import { Grid, IconButton, Button, Paper } from "@mui/material";
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -6,8 +6,9 @@ import TaskList from "../TaskList/TaskList";
 import dayjs from "dayjs";
 
 import "./WeeklyTasks.css";
+import AddTodo from "../AddTask/AddTask";
 
-const WeeklyTasks = (weekOffset) => {
+const WeeklyTasks = ({ weekOffset }) => {
   const [days, setDays] = React.useState([]);
 
   useEffect(() => {
@@ -16,8 +17,9 @@ const WeeklyTasks = (weekOffset) => {
       day = day.add(weekOffset, "week");
     }
     if (weekOffset < 0) {
-      day = day.subtract(weekOffset, "week");
+      day = day.subtract(-weekOffset, "week");
     }
+    console.log("week offset", weekOffset);
     setDays([
       { token: "Sun", date: day.day(0) },
       { token: "Mon", date: day.day(1) },
@@ -37,7 +39,9 @@ const WeeklyTasks = (weekOffset) => {
           {days.map((item) => (
             <Paper className="weeklytasks__daycolumn" key={item.token}>
               <div>{item.token}</div>
-              <div>{item.date.date()}/{item.date.month()+1}/{item.date.year()}</div>
+              <div>
+                {item.date.date()}/{item.date.month() + 1}/{item.date.year()}
+              </div>
             </Paper>
           ))}
         </Paper>
@@ -45,6 +49,7 @@ const WeeklyTasks = (weekOffset) => {
           {days.map((item) => (
             <div className="weeklytasks__daycolumn" key={item.token}>
               <TaskList day={item.date} mode="equal"></TaskList>
+              <AddTodo dueDate={item.date}></AddTodo>
             </div>
           ))}
         </div>
