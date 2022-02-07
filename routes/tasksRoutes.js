@@ -10,7 +10,7 @@ import auth from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.get("/", getTasks);
+router.get("/", auth, getTasks);
 router.post("/", auth, createTask);
 router.patch("/:id", auth, updateTask);
 router.delete("/:id", auth, deleteTask);

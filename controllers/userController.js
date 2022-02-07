@@ -17,7 +17,7 @@ export const signIn = async (req, res) => {
 
     const existingUser = existingUserQuery.rows[0];
 
-    return res.status(200).json(existingUser);
+    // return res.status(200).json(existingUser);
 
     const isPasswordCorrect = await bcrypt.compare(
       password,
@@ -66,7 +66,7 @@ export const signUp = async (req, res) => {
       [email, firstName, lastName, hashedPassword]
     );
     const newUser = newUserQuery.rows[0];
-    const token = jwt.sign({ email: newUser.email, id: newUser.id }, "test", {
+    const token = jwt.sign({ email: newUser.email, id: newUser.user_id }, "test", {
       expiresIn: "1h",
     });
     res.status(200).json({ result: newUser, token: token });

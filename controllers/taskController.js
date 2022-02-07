@@ -2,7 +2,8 @@ import pool from "../db.js";
 
 export const getTasks = async (req, res) => {
   try {
-    const allTasks = await pool.query("SELECT * FROM public.tasks");
+    if (!req.userId) return res.json({ message: "Unauthanticated" });
+    const allTasks = await pool.query("SELECT * FROM public.tasks where user_id = $1", [req.userId]);
 
     res.status(200).json(allTasks.rows);
   } catch (error) {

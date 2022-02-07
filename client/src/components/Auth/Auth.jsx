@@ -144,7 +144,7 @@ const Auth = () => {
               </Grid>
               <Grid item xs={12}>
                 <GoogleLogin
-                  clientId="776141787389-sps3eopqvjs8svrvhj39kq5fublj03nn.apps.googleusercontent.com"
+                  clientId="776141787389-slbklddahaamvhb3qbbkgidke0uq342u.apps.googleusercontent.com"
                   render={(renderProprs) => (
                     <Button
                       className="my-google-button"
