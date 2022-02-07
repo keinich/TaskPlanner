@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createTask } from "../../actions/taskActions";
 
+import './AddTask.css'
+
 const AddTodo = () => {
   const [postData, setPostData] = useState({
     name: "",
@@ -19,21 +21,9 @@ const AddTodo = () => {
 
   return (
     <Paper
-      className="myday__paper"
-      position="sticky"
-      sx={{
-        position: "sticky",
-        // dislpay:'flex',
-        top: '6.5vh',
-        // top: '90%',  
-        // left: 0,
-        // right: 0,
-        // top: "70px",
-        zIndex: 1100,
-        width: "inherit",
-      }}
+      className="addtask__paper"
     >
-      <form style={{ display: "flex" }} onSubmit={handleSubmit}>
+      <form style={{ display: "flex", width: '100%' }} onSubmit={handleSubmit}>
         {/* <TextField name="taskName" variant="outlined"/> */}
         <Input
           placeholder="New Task"

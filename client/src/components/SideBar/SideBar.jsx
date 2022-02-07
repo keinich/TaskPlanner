@@ -133,7 +133,7 @@ export default function MiniDrawer({ contentElement }) {
   };
 
   return (
-    <Box sx={{ display: "flex", flexGrow: 1 }}>
+    <Box sx={{ display: "flex", flexGrow: 1 }} className="app__container">
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar>
@@ -215,14 +215,7 @@ export default function MiniDrawer({ contentElement }) {
       </Drawer>
       <Box
         component="main"
-        className="mainContent"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          height: "100vh",
-          padding: 0,
-          overflowY: 'scroll'
-        }}
+        className="app__main"
       >
         <DrawerHeader />
         {contentElement}

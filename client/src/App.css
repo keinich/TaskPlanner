@@ -18,7 +18,8 @@ html,
 body {
   font-family: "Roboto";
   color: black;
-  /* background-color: white; */
+  overflow: hidden;
+  position: relative;
   margin: 0;
   padding: 0;
   height: 100%;

@@ -1,11 +1,28 @@
-.mainContent::-webkit-scrollbar {
+.app__main::-webkit-scrollbar {
   width: 0.25rem;
 }
 
-.mainContent::-webkit-scrollbar-track {
+.app__main::-webkit-scrollbar-track {
   background: #1e1e24;
 }
 
-.mainContent::-webkit-scrollbar-thumb {
+.app__main::-webkit-scrollbar-thumb {
   background: #6649b8;
+}
+
+.app__main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.app__container {
+  height: 100%;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
 }
