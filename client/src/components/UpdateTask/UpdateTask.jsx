@@ -6,6 +6,7 @@ import { Button, Paper, TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { updateTask } from "../../actions/taskActions";
 import DateTimePicker from "@mui/lab/DateTimePicker";
+import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 
 import "./UpdateTask.css";
 
@@ -89,8 +90,9 @@ export default function UpdateTask({ openDrawerCaller, taskId }) {
           >
             {task.name}
           </TextField>
-          <DateTimePicker
-            label="Due Date"
+          <DesktopDatePicker
+            label="Date desktop"
+            // inputFormat="MM/dd/yyyy"
             value={taskData.due_date}
             onChange={(e) => setTaskData({ ...taskData, due_date: e })}
             renderInput={(params) => (

@@ -1,42 +1,53 @@
 import { Grid, Paper } from "@mui/material";
 import React from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import TaskList from "../TaskList/TaskList";
+import dayjs from "dayjs";
 
 import "./WeeklyTasks.css";
 
-const WeeklyTasks = () => {
+const WeeklyTasks = (weekOffset) => {
+  const [days, setDays] = React.useState([]);
+
+  useEffect(() => {
+    let day = dayjs();
+    if (weekOffset > 0) {
+      day = day.add(weekOffset, "week");
+    }
+    if (weekOffset < 0) {
+      day = day.subtract(weekOffset, "week");
+    }
+    setDays([
+      { token: "Sun", date: day.day(0) },
+      { token: "Mon", date: day.day(1) },
+      { token: "Tue", date: day.day(2) },
+      { token: "Wen", date: day.day(3) },
+      { token: "Thu", date: day.day(4) },
+      { token: "Fri", date: day.day(5) },
+      { token: "Sat", date: day.day(6) },
+    ]);
+    console.log("showing days", day.day());
+  }, [weekOffset]);
+
   return (
-    <Paper elevation="8" className="weeklytasks__outer">
+    <Paper elevation={8} className="weeklytasks__outer">
       <div className="weeklytasks__inner">
-        <div className="weeklytasks__dayline">
-          {["Mon", "Tue", "Wen", "Thu", "Fri", "Sat", "Sun"].map((key) => (
-            <div className="weeklytasks__daycolumn">
-              <div>{key}</div>
+        <Paper className="weeklytasks__dayline">
+          {days.map((item) => (
+            <Paper className="weeklytasks__daycolumn" key={item.token}>
+              <div>{item.token}</div>
+              <div>{item.date.date()}/{item.date.month()+1}/{item.date.year()}</div>
+            </Paper>
+          ))}
+        </Paper>
+        <div className="weeklytasks__days">
+          {days.map((item) => (
+            <div className="weeklytasks__daycolumn" key={item.token}>
+              <TaskList day={item.date} mode="equal"></TaskList>
             </div>
           ))}
         </div>
-        {/* <Grid container spacing={2}>
-          <Grid item xs={2} className="weeklytasks__daycolumn">
-            <div>Mon</div>
-          </Grid>
-          <Grid item xs={2} className="weeklytasks__daycolumn">
-            <div>Mon</div>
-          </Grid>
-          <Grid item xs={2} className="weeklytasks__daycolumn">
-            <div>Mon</div>
-          </Grid>
-          <Grid item xs={2} className="weeklytasks__daycolumn">
-            <div>Mon</div>
-          </Grid>
-          <Grid item xs={2} className="weeklytasks__daycolumn">
-            <div>Mon</div>
-          </Grid>
-          <Grid item xs={2} className="weeklytasks__daycolumn">
-            <div>Mon</div>
-          </Grid>
-          <Grid item xs={2} className="weeklytasks__daycolumn">
-            <div>Mon</div>
-          </Grid>
-        </Grid> */}
       </div>
     </Paper>
   );

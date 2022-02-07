@@ -5,6 +5,8 @@ import WeeklyTasks from "../WeeklyTasks/WeeklyTasks";
 import "./Calendar.css";
 
 const Calendar = () => {
+  const [offset, setOffset] = React.useState(0);
+
   return (
     <div className="calendar__canvas">
       <div className="calendar__content">
@@ -22,7 +24,7 @@ const Calendar = () => {
                     </div>
                   </div>
                 </div>
-                <WeeklyTasks></WeeklyTasks>
+                <WeeklyTasks weekOffset={offset}></WeeklyTasks>
               </div>
             </div>
           </div>

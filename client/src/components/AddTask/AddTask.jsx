@@ -6,17 +6,18 @@ import { createTask } from "../../actions/taskActions";
 import "./AddTask.css";
 
 const AddTodo = () => {
-  const [postData, setPostData] = useState({
+  const [taskData, setPostData] = useState({
     name: "",
     description: "",
+    due_date: new Date(),
     userId: 0,
   });
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("creating task", postData);
-    dispatch(createTask(postData));
+    console.log("creating task", taskData);
+    dispatch(createTask(taskData));
   };
 
   return (
@@ -26,8 +27,8 @@ const AddTodo = () => {
         <Input
           placeholder="New Task"
           style={{ width: "90%" }}
-          value={postData.taskName}
-          onChange={(e) => setPostData({ ...postData, name: e.target.value })}
+          value={taskData.taskName}
+          onChange={(e) => setPostData({ ...taskData, name: e.target.value })}
         />
         <Button
           type="submit"

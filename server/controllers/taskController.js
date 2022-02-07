@@ -13,12 +13,12 @@ export const getTasks = async (req, res) => {
 export const createTask = async (req, res) => {
   try {
     console.log("body", req.body);
-    const { description, name } = req.body;
+    const { description, name, due_date } = req.body;
     if (!req.userId) return res.json({ message: "Unauthanticated" });
 
     const newTask = await pool.query(
-      "INSERT INTO tasks (name, description, user_id, done) VALUES($1,$2,$3,false) RETURNING *",
-      [name, description, req.userId]
+      "INSERT INTO tasks (name, description, user_id, done, due_date) VALUES($1,$2,$3,false, $4) RETURNING *",
+      [name, description, req.userId, due_date]
     );
 
     res.status(201).json(newTask.rows[0]);
