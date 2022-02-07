@@ -1,8 +1,8 @@
 import axios from "axios";
 import { getProfile } from "../services/authService";
 
-const API = axios.create({ baseURL: "http://localhost:5000" });
-// const API = axios.create();
+// const API = axios.create({ baseURL: "http://localhost:5000" });
+const API = axios.create();
 
 export const fetchTasks = () =>
   API.get("/tasks", {
