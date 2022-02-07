@@ -48,7 +48,7 @@ export default function UpdateTask({ openDrawerCaller, taskId }) {
 
   const list = () => (
     <Box
-      sx={{ width: 250 }}
+      sx={{ width: '100%' }}
       role="presentation"
       onClick={toggleDrawer(true)}
       // onKeyDown={toggleDrawer(true)}

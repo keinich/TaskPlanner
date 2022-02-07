@@ -109,10 +109,10 @@ export const signUpWithGoogle = async (req, res) => {
     const newUserQuery = await pool.query(
       "INSERT INTO public.users (email, first_name, last_name, google_id) VALUES($1,$2,$3,$4) RETURNING *",
       [
-        profileObject.email,
-        profileObject.givenName,
-        profileObject.familyName,
-        profileObject.googleId,
+        profileObj.email,
+        profileObj.givenName,
+        profileObj.familyName,
+        profileObj.googleId,
       ]
     );
     const newUser = newUserQuery.rows[0];

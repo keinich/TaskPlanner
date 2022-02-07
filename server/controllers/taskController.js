@@ -17,7 +17,7 @@ export const createTask = async (req, res) => {
     if (!req.userId) return res.json({ message: "Unauthanticated" });
 
     const newTask = await pool.query(
-      "INSERT INTO tasks (name, description, user_id) VALUES($1,$2,$3) RETURNING *",
+      "INSERT INTO tasks (name, description, user_id, done) VALUES($1,$2,$3,false) RETURNING *",
       [name, description, req.userId]
     );
 
