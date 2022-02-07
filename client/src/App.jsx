@@ -2,9 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ThemeProvider, Typography } from "@mui/material";
+// import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import DateAdapter from '@mui/lab/AdapterDayjs';
+
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import darkTheme from "./themes";
 
-import {  SideBar, Auth } from "./components";
+import { SideBar, Auth } from "./components";
 import { getTasks } from "./actions/taskActions";
 
 import "./App.css";
@@ -21,7 +25,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getTasks());
-    setProfile(localStorage.getItem("profile"));   
+    setProfile(localStorage.getItem("profile"));
   }, [dispatch, profile, location]);
 
   const authToken = profile !== undefined && profile !== null;
@@ -29,19 +33,21 @@ const App = () => {
   console.log("authToken", authToken);
 
   return (
-    <ThemeProvider theme={darkTheme}>      
-      {profile ? (
-        <Routes>
-          <Route
-            path="/"
-            element={<SideBar contentElement={<MyDay />}></SideBar>}
-          />
-          <Route path="/auth" element={<Auth />} />
-        </Routes>
-      ) : (
-        <Auth />
-      )}
-    </ThemeProvider>
+    <LocalizationProvider dateAdapter={DateAdapter}>
+      <ThemeProvider theme={darkTheme}>
+        {profile ? (
+          <Routes>
+            <Route
+              path="/"
+              element={<SideBar contentElement={<MyDay />}></SideBar>}
+            />
+            <Route path="/auth" element={<Auth />} />
+          </Routes>
+        ) : (
+          <Auth />
+        )}
+      </ThemeProvider>
+    </LocalizationProvider>
   );
 };
 

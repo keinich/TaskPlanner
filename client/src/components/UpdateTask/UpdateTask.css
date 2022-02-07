@@ -1,3 +1,8 @@
 .update__paper {
   padding: 20px;
 }
+
+.updatetask__datepicker {
+  width: 100%;
+  margin-bottom: 20px;
+}
