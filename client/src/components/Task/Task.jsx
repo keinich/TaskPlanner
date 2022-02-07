@@ -6,22 +6,40 @@ import React from "react";
 import "./Task.css";
 import UpdateTask from "../UpdateTask/UpdateTask";
 import { useDispatch } from "react-redux";
-import { deleteTask } from "../../actions/taskActions";
+import { deleteTask, updateTask } from "../../actions/taskActions";
 
 const Task = ({ task }) => {
+  const [taskData, setTaskData] = React.useState({
+    name: "",
+    description: "",
+    done: false,
+    due_date: null,
+  });
   const callOpenDrawer = React.createRef(null);
 
   const dispatch = useDispatch();
 
+  React.useEffect(() => {
+    setTaskData(task);
+  }, [task]);
+
   const openDrawer = () => {
     callOpenDrawer.current();
+  };
+
+  const handleDoneChanged = (e) => {
+    setTaskData({ ...taskData, done: e.target.checked });
+    dispatch(updateTask(task.task_id, { ...taskData, done: e.target.checked }));
   };
 
   return (
     <>
       <Grid xs={12} item>
         <Paper elevation={2} className="task__paper">
-          <Checkbox></Checkbox>
+          <Checkbox
+            checked={taskData.done}
+            onChange={handleDoneChanged}
+          ></Checkbox>
           <span className="task__span">{task.name}</span>
           <IconButton
             color="primary"
@@ -41,7 +59,10 @@ const Task = ({ task }) => {
           </IconButton>
         </Paper>
       </Grid>
-      <UpdateTask openDrawerCaller={callOpenDrawer} taskId={task.task_id}></UpdateTask>
+      <UpdateTask
+        openDrawerCaller={callOpenDrawer}
+        taskId={task.task_id}
+      ></UpdateTask>
     </>
   );
 };

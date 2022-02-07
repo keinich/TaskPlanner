@@ -38,16 +38,16 @@ export const updateTask = async (req, res) => {
     [id]
   );
 
-  // console.log("existing task", existingTask);
-  const { description, name } = req.body;
+  // console.log("existing task", existingTaskQuery);
+  const { description, name, done } = req.body;
 
   if (existingTaskQuery.rows.length === 0) {
     return res.status(404).send("No task with given id");
   }
 
   const updatedTaskQuery = await pool.query(
-    "update tasks set name = $2, description = $3 where task_id = $1 RETURNING *",
-    [id, name, description]
+    "update tasks set name = $2, description = $3, done = $4 where task_id = $1 RETURNING *",
+    [id, name, description, done]
   );
   return res.status(200).json(updatedTaskQuery.rows[0]);
 };

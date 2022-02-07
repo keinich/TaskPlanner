@@ -13,7 +13,12 @@ const ariaLabel = { "aria-label": "description" };
 export default function UpdateTask({ openDrawerCaller, taskId }) {
   const [state, setState] = React.useState(false);
   const dispatch = useDispatch();
-  const [taskData, setTaskData] = React.useState({ name: "", description: "" });
+  const [taskData, setTaskData] = React.useState({
+    name: "",
+    description: "",
+    done: 0,
+    due_date: null,
+  });
 
   const task = useSelector((state) =>
     state.tasks.find((t) => t.task_id === taskId)
@@ -48,7 +53,7 @@ export default function UpdateTask({ openDrawerCaller, taskId }) {
 
   const list = () => (
     <Box
-      sx={{ width: '100%' }}
+      sx={{ width: "100%" }}
       role="presentation"
       onClick={toggleDrawer(true)}
       // onKeyDown={toggleDrawer(true)}
@@ -61,7 +66,7 @@ export default function UpdateTask({ openDrawerCaller, taskId }) {
           onSubmit={handleSubmit}
         >
           <TextField
-            sx={{marginBottom:"20px"}}
+            sx={{ marginBottom: "20px" }}
             name="name"
             variant="outlined"
             label="Name"
@@ -70,7 +75,7 @@ export default function UpdateTask({ openDrawerCaller, taskId }) {
             onChange={(e) => setTaskData({ ...taskData, name: e.target.value })}
           ></TextField>
           <TextField
-            sx={{marginBottom:"20px"}}
+            sx={{ marginBottom: "20px" }}
             name="description"
             variant="outlined"
             label="Description"
@@ -105,7 +110,7 @@ export default function UpdateTask({ openDrawerCaller, taskId }) {
           open={state}
           // open={anc}
           onClose={toggleDrawer(false)}
-          sx={{zIndex: 1260}}
+          sx={{ zIndex: 1260 }}
         >
           {list()}
         </Drawer>
