@@ -182,13 +182,13 @@ export default function MiniDrawer({ contentElement }) {
         </DrawerHeader>
         <Divider />
         <List>
-          <ListItem button key={"MyDay"}>
+          <ListItem button key={"MyDay"} onClick={() => navigate("/myday")}>
             <ListItemIcon>
               <WbSunnyIcon />
             </ListItemIcon>
             <ListItemText primary="My Day" />
           </ListItem>
-          <ListItem button key={"Calendar"}>
+          <ListItem button key={"Calendar"}  onClick={() => navigate("/calendar")}>
             <ListItemIcon>
               <CalenderTodayIcon />
             </ListItemIcon>

@@ -1,0 +1,64 @@
+.calendar__canvas {
+  flex-grow: 1;
+  position: relative;
+  z-index: 2000;
+}
+
+.calendar__content {
+  position: absolute;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: 10px;
+  margin-top: 0;
+}
+
+.calendar__main__content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin-right: 0;
+  position: relative;
+  transition: margin .1s ease-in;
+}
+
+.calendar__inner__canvas {
+  flex-grow: 1;
+  position: relative;
+}
+
+.timeline__outer {
+  bottom: 10px;
+  top: 0px;
+  right: 10px;
+  left: 10px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.timeline__inner {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%
+}
+
+.calendar__toolbar__wrapper {
+  display: flex;
+  padding: 8px 16px 8px 8px;
+}
+
+.calendar__toolbar {
+  justify-content: flex-start;
+  flex-grow: 2;
+  display: flex;
+}
+
+.calendar__inner__toolbar {
+  margin: 0 20px;
+}

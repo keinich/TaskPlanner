@@ -13,6 +13,7 @@ import { getTasks } from "./actions/taskActions";
 
 import "./App.css";
 import MyDay from "./components/MyDay/MyDay";
+import Calendar from "./components/Calendar/Calendar";
 
 const App = () => {
   // const [authToken, setAuthToken] = useState(false);
@@ -41,6 +42,14 @@ const App = () => {
               path="/"
               element={<SideBar contentElement={<MyDay />}></SideBar>}
             />
+             <Route
+              path="/myday"
+              element={<SideBar contentElement={<MyDay />}></SideBar>}
+            />
+            <Route
+             path="/calendar"
+             element={<SideBar contentElement={<Calendar />}></SideBar>}
+           />
             <Route path="/auth" element={<Auth />} />
           </Routes>
         ) : (
