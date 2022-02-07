@@ -4,6 +4,10 @@ import * as dotenv from 'dotenv';
 const env = dotenv.config().parsed;
 const Pool = pg1.Pool;
 
+console.log("env", env);
+console.log("process.env", process.env);
+console.log("process.env.DATABASE_URL", process.env.DATABASE_URL);
+
 const devConfig = {
   user: env.PG_USER,
   password: env.PG_PASSWORD,
