@@ -2,10 +2,11 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
-import { Button, Paper, TextField } from "@mui/material";
+import { Button, Grid, IconButton, Paper, TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { updateTask } from "../../actions/taskActions";
 import DateTimePicker from "@mui/lab/DateTimePicker";
+import CloseIcon from "@mui/icons-material/Close";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 
 import "./UpdateTask.css";
@@ -36,7 +37,7 @@ export default function UpdateTask({ openDrawerCaller, taskId }) {
   };
 
   const toggleDrawer = (open) => (event) => {
-    console.log("toggling drawer", open);
+    console.log("toggling drawer", event);
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
@@ -44,13 +45,14 @@ export default function UpdateTask({ openDrawerCaller, taskId }) {
       return;
     }
 
-    setState(open);
+    // setState(open);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("updating task", taskData);
     dispatch(updateTask(task.task_id, taskData));
+    setState(false);
   };
 
   const list = () => (
@@ -103,15 +105,29 @@ export default function UpdateTask({ openDrawerCaller, taskId }) {
               />
             )}
           />
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            type="submit"
-            fullWidth
-          >
-            Submit
-          </Button>
+          <div style={{ display: "flex" }}>
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              type="submit"
+              fullWidth
+            >
+              Submit
+            </Button>
+            <IconButton
+              color="primary"
+              aria-label="Delete"
+              className="task__icon"
+              onClick={(e) => {
+                e.preventDefault();
+                setState(false);
+                console.log("x click");
+              }}
+            >
+              <CloseIcon color="primary" />
+            </IconButton>
+          </div>
         </form>
       </Paper>
     </Box>

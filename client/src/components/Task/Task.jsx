@@ -25,6 +25,7 @@ const Task = ({ task }) => {
 
   const openDrawer = () => {
     callOpenDrawer.current();
+    console.log("open drawer")
   };
 
   const handleDoneChanged = (e) => {
@@ -35,20 +36,12 @@ const Task = ({ task }) => {
   return (
     <>
       <Grid xs={12} item>
-        <Paper elevation={2} className="task__paper">
+        <Paper elevation={2} className="task__paper" onClick={openDrawer}>
           <Checkbox
             checked={taskData.done}
             onChange={handleDoneChanged}
           ></Checkbox>
           <span className="task__span">{task.name}</span>
-          <IconButton
-            color="primary"
-            aria-label="Edit"
-            className="task__icon"
-            onClick={openDrawer}
-          >
-            <BuildIcon fontSize="small" />
-          </IconButton>
           <IconButton
             color="primary"
             aria-label="Delete"
