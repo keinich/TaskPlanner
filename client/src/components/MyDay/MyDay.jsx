@@ -18,12 +18,12 @@ import ProjectSelect from "../ProjectSelect/ProjectSelect";
 const MyDay = () => {
   return (
     <Fragment>
-      <Toolbar className="myday__header">
-        <WbSunnyIcon sx={{ height: "100%"}}></WbSunnyIcon>
+      <Toolbar variant="dense" className="myday__header">
+        <WbSunnyIcon sx={{ height: "100%" }}></WbSunnyIcon>
         <Typography variant="h6" noWrap component="div">
           My Day
         </Typography>
-        <Typography sx={{flexGrow: 1}}></Typography>
+        <Typography sx={{ flexGrow: 1 }}></Typography>
         <ProjectSelect></ProjectSelect>
       </Toolbar>
       <div className="myday__canvas">

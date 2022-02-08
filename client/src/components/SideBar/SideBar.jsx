@@ -25,7 +25,7 @@ import CalenderTodayIcon from "@mui/icons-material/CalendarToday";
 import TaskIcon from "@mui/icons-material/Task";
 import Button from "@mui/material/Button";
 
-import './SideBar.css'
+import "./SideBar.css";
 
 const drawerWidth = 240;
 
@@ -57,6 +57,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
+  minHeight: "48px!important"
 }));
 
 const AppBar = styled(MuiAppBar, {
@@ -136,7 +137,7 @@ export default function MiniDrawer({ contentElement }) {
     <Box sx={{ display: "flex", flexGrow: 1 }} className="app__container">
       <CssBaseline />
       <AppBar position="fixed" open={open}>
-        <Toolbar>
+        <Toolbar variant="dense">
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -188,7 +189,11 @@ export default function MiniDrawer({ contentElement }) {
             </ListItemIcon>
             <ListItemText primary="My Day" />
           </ListItem>
-          <ListItem button key={"Calendar"}  onClick={() => navigate("/calendar")}>
+          <ListItem
+            button
+            key={"Calendar"}
+            onClick={() => navigate("/calendar")}
+          >
             <ListItemIcon>
               <CalenderTodayIcon />
             </ListItemIcon>
@@ -213,11 +218,10 @@ export default function MiniDrawer({ contentElement }) {
           ))}
         </List>
       </Drawer>
-      <Box
-        component="main"
-        className="app__main"
-      >
+      <Box component="main" className="app__main">
         <DrawerHeader />
+        {/* <div sx={{ minHeight: "48px" }}></div> */}
+        {/* <Toolbar variant="dense"></Toolbar> */}
         {contentElement}
       </Box>
     </Box>
