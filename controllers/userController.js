@@ -31,7 +31,7 @@ export const signIn = async (req, res) => {
     const token = jwt.sign(
       { email: existingUser.email, id: existingUser.user_id },
       "test",
-      { expiresIn: "1h" }
+      { expiresIn: "7d" }
     );
 
     res.status(200).json({ result: existingUser, token: token });
@@ -67,7 +67,7 @@ export const signUp = async (req, res) => {
     );
     const newUser = newUserQuery.rows[0];
     const token = jwt.sign({ email: newUser.email, id: newUser.user_id }, "test", {
-      expiresIn: "1h",
+      expiresIn: "7d",
     });
     res.status(200).json({ result: newUser, token: token });
   } catch (error) {
@@ -100,7 +100,7 @@ export const signUpWithGoogle = async (req, res) => {
         { email: existingUser.email, id: existingUser.user_id },
         "test",
         {
-          expiresIn: "1h",
+          expiresIn: "7d",
         }
       );
       return res.status(200).json({ result: existingUser, token: appToken });
