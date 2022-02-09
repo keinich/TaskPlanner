@@ -117,10 +117,10 @@ export const signUpWithGoogle = async (req, res) => {
     );
     const newUser = newUserQuery.rows[0];
     const appToken = jwt.sign(
-      { email: newUser.email, id: newUser.id },
+      { email: newUser.email, id: newUser.user_id },
       "test",
       {
-        expiresIn: "1h",
+        expiresIn: "7d",
       }
     );
     return res.status(200).json({ result: newUser, token: appToken });

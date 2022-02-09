@@ -1,4 +1,10 @@
-import React, { Fragment, useState, useEffect, useCallback } from "react";
+import React, {
+  Fragment,
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { styled } from "@mui/material/styles";
 import dayjs from "dayjs";
@@ -15,6 +21,7 @@ import { getTasks } from "../../actions/taskActions";
 import Task from "../Task/Task";
 
 import "./TaskList.css";
+import { updateTask } from "../../actions/taskActions";
 
 dayjs.extend(dayOfYear);
 
@@ -92,17 +99,43 @@ const TaskList = ({ day, mode }) => {
     [tasks1]
   );
 
-  // console.log("rendering tasks");
+  const ref = useRef(null);
+  const [{ handlerId }, drop] = useDrop({
+    accept: "task",
+    collect(monitor) {
+      // console.log("monitor", monitor.getHandlerId());
+      return {
+        handlerId: monitor.getHandlerId(),
+      };
+    },
+    hover(item, monitor) {
+      if (tasks1.length === 0) {
+        tasks1.push(item.task);
+      } else {
+        if (item.task.due_date !== day) {
+          tasks1.push(item.task);
+        }
+      }
+      item.task.due_date = day;
+      setDummy((p) => p + 1);
+    },
+    drop(item, monitor) {
+      // dispatch(updateTask(item.task_id, item.task));
+      console.log("dispatch update", item.task);
+      dispatch(updateTask(item.task.task_id, { ...item.task }));
+    },
+  });
 
+  drop(ref);
   return (
     <>
       <Fragment>
-        <Box container spacing={0} className="tasklist__grid">
+        <Box container spacing={0} className="tasklist__grid" ref={ref}>
           {Object.keys(tasks1).map(
             (key) =>
               !tasks1[key].done && (
                 <Task
-                  opacity={tasks1[key].task_id === draggingTaskId ? 0.1 : 1}
+                  opacity={tasks1[key].task_id === draggingTaskId ? 0.5 : 1}
                   task={tasks1[key]}
                   onPrioChange={onPrioChange}
                   key={key}
