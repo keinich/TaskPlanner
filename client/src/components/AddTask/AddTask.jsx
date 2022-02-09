@@ -17,6 +17,8 @@ const AddTodo = ({dueDate}) => {
     description: "",
     due_date: dueDate,
     userId: 0,
+    priority: 0,
+    active: true
   });
   const dispatch = useDispatch();
 

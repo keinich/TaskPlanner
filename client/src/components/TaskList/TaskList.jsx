@@ -1,9 +1,9 @@
-import React, { Fragment, useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import React, { Fragment, useState, useEffect, useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { styled } from "@mui/material/styles";
 import dayjs from "dayjs";
 import dayOfYear from "dayjs/plugin/dayOfYear";
-
+import { useDrop } from "react-dnd";
 
 import { Paper, Grid, IconButton, Box, Button } from "@mui/material";
 import BuildIcon from "@mui/icons-material/Build";
@@ -16,32 +16,98 @@ import Task from "../Task/Task";
 
 import "./TaskList.css";
 
-dayjs.extend(dayOfYear)
+dayjs.extend(dayOfYear);
 
 const TaskList = ({ day, mode }) => {
+  const dispatch = useDispatch();
+  const [dummy, setDummy] = useState(0);
+  const [draggingTaskId, setDraggingTaskId] = useState(0);
+
   if (day === undefined || day === null) {
     day = dayjs();
   }
   if (mode === undefined) {
     mode = "lessequal";
   }
-  console.log("showing day", day.dayOfYear());
+  // console.log("showing day", day.dayOfYear());
   const tasks = useSelector((state) =>
     state.tasks.filter(
       (task) =>
-        
-        (mode === "lessequal" &&  (task.due_date === null || dayjs(task.due_date).dayOfYear() <= day.dayOfYear())) ||
-        (mode === "equal" && task.due_date !== null && dayjs(task.due_date).dayOfYear() === day.dayOfYear())
+        (mode === "lessequal" &&
+          (task.due_date === null ||
+            dayjs(task.due_date).dayOfYear() <= day.dayOfYear())) ||
+        (mode === "equal" &&
+          task.due_date !== null &&
+          dayjs(task.due_date).dayOfYear() === day.dayOfYear())
     )
   );
   const [showDone, setShowDone] = useState(true);
+
+  const tasks1 = tasks.sort((x, y) => {
+    if (x.priority < y.priority) {
+      return -1;
+    }
+    if (x.priority > y.priority) {
+      return 1;
+    }
+    // a muss gleich b sein
+    return 0;
+  });
+  console.log(
+    "tasks1",
+    tasks1.map((t) => {
+      return `task: ${t.name}, prio: ${t.priority}`;
+    })
+  );
+
+  const onPrioChange = useCallback(
+    (oldPrio, newPrio, taskId, dropped) => {
+      if (dropped) {
+        setDraggingTaskId(0);
+        setDummy((p) => p + 1);
+        // console.log("draggingTaskId", draggingTaskId);
+        return;
+      }
+      // console.log("prio change");
+      setDraggingTaskId((p) => taskId);
+      if (oldPrio > newPrio) {
+        let currentMinPrio = newPrio;
+        tasks1.forEach((t) => {
+          if (t.task_id !== taskId && t.priority === currentMinPrio) {
+            t.priority += 1;
+            currentMinPrio += 1;
+          }
+        });
+      } else {
+        let currentMaxPrio = newPrio;
+        tasks1.forEach((t) => {
+          if (t.task_id !== taskId && t.priority === currentMaxPrio) {
+            t.priority -= 1;
+            currentMaxPrio -= 1;
+          }
+        });
+      }
+      setDummy((p) => p + 1);
+    },
+    [tasks1]
+  );
+
+  // console.log("rendering tasks");
 
   return (
     <>
       <Fragment>
         <Box container spacing={0} className="tasklist__grid">
-          {Object.keys(tasks).map(
-            (key) => !tasks[key].done && <Task task={tasks[key]} key={key} />
+          {Object.keys(tasks1).map(
+            (key) =>
+              !tasks1[key].done && (
+                <Task
+                  opacity={tasks1[key].task_id === draggingTaskId ? 0.1 : 1}
+                  task={tasks1[key]}
+                  onPrioChange={onPrioChange}
+                  key={key}
+                />
+              )
           )}
           {showDone ? (
             <Button
@@ -66,8 +132,8 @@ const TaskList = ({ day, mode }) => {
           )}
 
           {showDone &&
-            Object.keys(tasks).map(
-              (key) => tasks[key].done && <Task task={tasks[key]} key={key} />
+            Object.keys(tasks1).map(
+              (key) => tasks1[key].done && <Task task={tasks1[key]} key={key} />
             )}
         </Box>
       </Fragment>

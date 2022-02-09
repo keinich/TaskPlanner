@@ -18,7 +18,7 @@ const authMiddleware = async (req, res, next) => {
     
     if (token && isCustomAuth) {
       decodedData = jwt.verify(token, "test");
-      console.log("middleware auth", decodedData);
+      // console.log("middleware auth", decodedData);
 
       req.userId = decodedData?.id;
     } else {

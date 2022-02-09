@@ -32,6 +32,8 @@ CREATE TABLE public.tasks(
   project_list_id int null,
   due_date timestamp with time zone null,
   done boolean not null,
+  priority int not null,
+  active boolean not null,
   CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(user_id),
   CONSTRAINT fk_project_list FOREIGN KEY(project_list_id) REFERENCES project_lists(project_list_id)
 );

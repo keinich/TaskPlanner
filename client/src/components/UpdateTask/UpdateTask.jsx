@@ -21,6 +21,8 @@ export default function UpdateTask({ openDrawerCaller, taskId }) {
     description: "",
     done: 0,
     due_date: null,
+    priority: 0,
+    active: true,
   });
 
   const task = useSelector((state) =>

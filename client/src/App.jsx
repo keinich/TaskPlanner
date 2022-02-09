@@ -3,7 +3,9 @@ import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ThemeProvider, Typography } from "@mui/material";
 // import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import DateAdapter from '@mui/lab/AdapterDayjs';
+import DateAdapter from "@mui/lab/AdapterDayjs";
+import { HTML5Backend } from 'react-dnd-html5-backend'
+import { DndProvider } from 'react-dnd'
 
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import darkTheme from "./themes";
@@ -36,25 +38,27 @@ const App = () => {
   return (
     <LocalizationProvider dateAdapter={DateAdapter}>
       <ThemeProvider theme={darkTheme}>
-        {profile ? (
-          <Routes>
-            <Route
-              path="/"
-              element={<SideBar contentElement={<MyDay />}></SideBar>}
-            />
-             <Route
-              path="/myday"
-              element={<SideBar contentElement={<MyDay />}></SideBar>}
-            />
-            <Route
-             path="/calendar"
-             element={<SideBar contentElement={<Calendar />}></SideBar>}
-           />
-            <Route path="/auth" element={<Auth />} />
-          </Routes>
-        ) : (
-          <Auth />
-        )}
+        <DndProvider backend={HTML5Backend}>
+          {profile ? (
+            <Routes>
+              <Route
+                path="/"
+                element={<SideBar contentElement={<MyDay />}></SideBar>}
+              />
+              <Route
+                path="/myday"
+                element={<SideBar contentElement={<MyDay />}></SideBar>}
+              />
+              <Route
+                path="/calendar"
+                element={<SideBar contentElement={<Calendar />}></SideBar>}
+              />
+              <Route path="/auth" element={<Auth />} />
+            </Routes>
+          ) : (
+            <Auth />
+          )}
+        </DndProvider>
       </ThemeProvider>
     </LocalizationProvider>
   );

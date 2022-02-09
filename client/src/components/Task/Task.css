@@ -11,3 +11,10 @@
   margin: auto;
   word-wrap: anywhere;
 }
+
+.task__span__box {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
