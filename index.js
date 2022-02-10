@@ -5,6 +5,8 @@ import bodyParser from "body-parser";
 import pool from "./db.js";
 import taskRoutes from "./routes/tasksRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import projectRoutes from "./routes/projectRoutes.js";
+import projectListRoutes from "./routes/projectListRoutes.js";
 
 
 import path from 'path'
@@ -31,6 +33,8 @@ console.log(__dirname);
 
 app.use("/tasks", taskRoutes);
 app.use("/users", userRoutes);
+app.use("/projects", projectRoutes);
+app.use("/project-lists", projectListRoutes);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client/build/index.html"));

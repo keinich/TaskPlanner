@@ -199,11 +199,11 @@ export default function MiniDrawer({ contentElement }) {
             </ListItemIcon>
             <ListItemText primary="Calendar" />
           </ListItem>
-          <ListItem button key={"Backlogs"}>
+          <ListItem button key={"Boards"} onClick={() => navigate("/boards")}>
             <ListItemIcon>
               <TaskIcon />
             </ListItemIcon>
-            <ListItemText primary="Backlog" />
+            <ListItemText primary="Boards" />
           </ListItem>
         </List>
         <Divider />

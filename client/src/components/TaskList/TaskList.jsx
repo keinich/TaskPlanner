@@ -11,7 +11,14 @@ import dayjs from "dayjs";
 import dayOfYear from "dayjs/plugin/dayOfYear";
 import { useDrop } from "react-dnd";
 
-import { Paper, Grid, IconButton, Box, Button } from "@mui/material";
+import {
+  Paper,
+  Grid,
+  IconButton,
+  Box,
+  Button,
+  isHostComponent,
+} from "@mui/material";
 import BuildIcon from "@mui/icons-material/Build";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ArrowDropDownOutlinedIcon from "@mui/icons-material/ArrowDropDownOutlined";
@@ -60,12 +67,6 @@ const TaskList = ({ day, mode }) => {
     // a muss gleich b sein
     return 0;
   });
-  console.log(
-    "tasks1",
-    tasks1.map((t) => {
-      return `task: ${t.name}, prio: ${t.priority}`;
-    })
-  );
 
   const onPrioChange = useCallback(
     (oldPrio, newPrio, taskId, dropped) => {
@@ -99,6 +100,11 @@ const TaskList = ({ day, mode }) => {
     [tasks1]
   );
 
+  const forceRender = useCallback(() => {
+    setDummy((p) => p + 1);
+    console.log("rendering", day);
+  }, []);
+
   const ref = useRef(null);
   const [{ handlerId }, drop] = useDrop({
     accept: "task",
@@ -109,19 +115,16 @@ const TaskList = ({ day, mode }) => {
       };
     },
     hover(item, monitor) {
-      if (tasks1.length === 0) {
-        tasks1.push(item.task);
-      } else {
-        if (item.task.due_date !== day) {
-          tasks1.push(item.task);
-        }
+      if (item.task.due_date !== day) {
+        console.log(`changing duedate: ${item.task.due_date} to ${day}`);
+        item.task.due_date = day;
+        item.updateParent();
+        item.updateParent = forceRender;
       }
-      item.task.due_date = day;
+
       setDummy((p) => p + 1);
     },
     drop(item, monitor) {
-      // dispatch(updateTask(item.task_id, item.task));
-      console.log("dispatch update", item.task);
       dispatch(updateTask(item.task.task_id, { ...item.task }));
     },
   });
@@ -138,6 +141,7 @@ const TaskList = ({ day, mode }) => {
                   opacity={tasks1[key].task_id === draggingTaskId ? 0.5 : 1}
                   task={tasks1[key]}
                   onPrioChange={onPrioChange}
+                  renderTaskList={forceRender}
                   key={key}
                 />
               )

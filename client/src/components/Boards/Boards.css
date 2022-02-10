@@ -1,0 +1,64 @@
+.weeklytasks__outer {
+  display: flex;
+  flex-direction: column;
+  /* background-color: #3b3c3f; */
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+  scroll-padding-top: 100px;
+  scroll-padding-left: 216px;
+}
+
+.weeklytasks__outer::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+.weeklytasks__outer::-webkit-scrollbar-track {
+  background: #1e1e24;
+}
+
+.weeklytasks__outer::-webkit-scrollbar-thumb {
+  background: #6649b8;
+}
+
+.weeklytasks__inner {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  flex: 1;
+  cursor: grab;
+  box-sizing: border-box;
+  overflow-y: hidden;
+}
+
+.weeklytasks__dayline {
+  display: flex;
+  position: sticky;
+  top: 0;
+  /* min-height: 32px; */
+  z-index: 4;
+  /* border-bottom: 1px solid #DFE1E6; */
+}
+
+.weeklytasks__daycolumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 5px;
+  border-right: 1px solid #dfe1e6;
+  border-bottom: 1px solid #dfe1e6;
+  box-sizing: border-box;
+  min-width: 200px;
+  width: 14.5%;
+}
+
+.weeklytasks__days {
+  display: flex;
+  position: sticky;
+  top: 0;
+  min-height: 32px;
+  z-index: 1;
+  height: 100%;
+  /* border-bottom: 1px solid #DFE1E6; */
+}

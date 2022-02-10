@@ -9,7 +9,7 @@ import UpdateTask from "../UpdateTask/UpdateTask";
 import { useDispatch } from "react-redux";
 import { deleteTask, getTasks, updateTask } from "../../actions/taskActions";
 
-const Task = ({ task, onPrioChange, opacity }) => {
+const Task = ({ task, onPrioChange, opacity, renderTaskList }) => {
   const [taskData, setTaskData] = React.useState({
     name: "",
     description: "",
@@ -90,14 +90,14 @@ const Task = ({ task, onPrioChange, opacity }) => {
   const [{ isDragging }, drag] = useDrag({
     type: "task",
     item: () => {
-      return { task };
+      return { task: task, updateParent: renderTaskList };
     },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
     end(item, monitor) {
       onPrioChange(0, 0, 0, true);
-    },
+    }
   });
 
   // const opacity = isDragging ? 0 : 1;

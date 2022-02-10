@@ -21,6 +21,24 @@ export const deleteTask = (taskId) =>
     headers: { Authorization: `token ${getProfile().token}` },
   });
 
+export const getProjects = () =>
+  API.get("/projects", {
+    headers: { Authorization: `token ${getProfile().token}` },
+  });
+export const createProject = (newProject) =>
+  API.post("/projects", newProject, {
+    headers: { Authorization: `token ${getProfile().token}` },
+  });
+
+export const getProjectLists = (projectId) =>
+  API.get(`/project-lists/${projectId}`, {
+    headers: { Authorization: `token ${getProfile().token}` },
+  });
+export const createProjectList = (newProjectList) =>
+  API.post("/project-lists", newProjectList, {
+    headers: { Authorization: `token ${getProfile().token}` },
+  });
+
 export const signIn = (formData) => API.post("/users/signin", formData);
 export const signUp = (formData) => API.post("/users/signup", formData);
 export const signUpWithGoogle = (googleProfile) =>

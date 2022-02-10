@@ -10,7 +10,7 @@ const AddTodo = ({dueDate}) => {
   if (dueDate === undefined) {
     dueDate = new Date();
   }
-  console.log("dueDate", dueDate);
+  // console.log("dueDate", dueDate);
 
   const [taskData, setTaskData] = useState({
     name: "",
@@ -24,6 +24,9 @@ const AddTodo = ({dueDate}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (taskData.name === "" || taskData.name === null) {
+      return
+    }
     console.log("creating task", taskData);
     dispatch(createTask(taskData));
   };

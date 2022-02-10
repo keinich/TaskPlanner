@@ -16,6 +16,8 @@ import { getTasks } from "./actions/taskActions";
 import "./App.css";
 import MyDay from "./components/MyDay/MyDay";
 import Calendar from "./components/Calendar/Calendar";
+import Boards from "./components/Boards/Boards";
+import { getProjects } from "./actions/projectActions";
 
 const App = () => {
   // const [authToken, setAuthToken] = useState(false);
@@ -28,6 +30,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getTasks());
+    dispatch(getProjects());
     setProfile(localStorage.getItem("profile"));
   }, [dispatch, profile, location]);
 
@@ -52,6 +55,10 @@ const App = () => {
               <Route
                 path="/calendar"
                 element={<SideBar contentElement={<Calendar />}></SideBar>}
+              />
+              <Route
+                path="/boards"
+                element={<SideBar contentElement={<Boards />}></SideBar>}
               />
               <Route path="/auth" element={<Auth />} />
             </Routes>
