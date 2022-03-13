@@ -30,7 +30,7 @@ const MyDay = () => {
         <div className="myday__content">
           <div className="myday__list__wrapper">
             <div className="myday__list__content">
-              <TaskList></TaskList>
+              <TaskList mode="myday"></TaskList>
               <AddTodo sx={{ width: "100vw" }}></AddTodo>
             </div>
           </div>

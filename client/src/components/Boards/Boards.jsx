@@ -1,5 +1,5 @@
 import { Button, TextField, IconButton } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import WeeklyTasks from "../WeeklyTasks/WeeklyTasks";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
@@ -15,7 +15,7 @@ const Boards = () => {
 
   const projects = useSelector((state) => state.projectReducers);
   const [projectId, setProjectId] = React.useState(
-    projects.length > 0 ? projects[0].project_id : 3
+    projects.length > 0 ? projects[0].project_id : 0
   );
 
   const handleProjectChange = (e) => {
@@ -23,6 +23,10 @@ const Boards = () => {
     setProjectId(e.target.value);
     dispatch(getProjectLists(e.target.value));
   };
+
+  useEffect(() => {
+    // dispatch(getProjectLists(projectId));
+  }, [dispatch, projectId]);
 
   return (
     <div className="calendar__canvas">

@@ -48,7 +48,7 @@ const WeeklyTasks = ({ weekOffset }) => {
         <div className="weeklytasks__days">
           {days.map((item) => (
             <div className="weeklytasks__daycolumn" key={item.token}>
-              <TaskList day={item.date} mode="equal"></TaskList>
+              <TaskList day={item.date} mode="calendar"></TaskList>
               <AddTodo dueDate={item.date}></AddTodo>
             </div>
           ))}

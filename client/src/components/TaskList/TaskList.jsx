@@ -45,15 +45,16 @@ const TaskList = ({ day, mode }) => {
   }
   // console.log("showing day", day.dayOfYear());
   const tasks = useSelector((state) =>
+    (mode!=="project") ?
     state.tasks.filter(
       (task) =>
-        (mode === "lessequal" &&
+        (mode === "myday" &&
           (task.due_date === null ||
             dayjs(task.due_date).dayOfYear() <= day.dayOfYear())) ||
-        (mode === "equal" &&
+        (mode === "calendar" &&
           task.due_date !== null &&
           dayjs(task.due_date).dayOfYear() === day.dayOfYear())
-    )
+    ) : state.tasks
   );
   const [showDone, setShowDone] = useState(true);
 
